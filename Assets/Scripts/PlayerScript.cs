@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
     public GameObject launcherRotator;
     public GameObject launcher;
-    public GameObject rocketSpawner;
-    public GameObject rocketPrefab;
+    
+    public GameObject playerCamera;
 
-    private float rotationSpeed = 100.0f;
-    private float maxForce = 10000f;
-    private float chargingSpeed = 2000f;
-
-    private float rocketForce = 500f;
+    public float healthPoints = 100f;
+    
+    private float rotationSpeed = 100f;
 
 
     void Update()
@@ -24,36 +23,23 @@ public class PlayerScript : MonoBehaviour
         
         launcherRotator.transform.Rotate(0f, 0f, rotatorZPos);
         launcher.transform.Rotate(launcherXPos, 0f, 0f);
-
-        if (Input.GetButtonDown("Jump"))
+      
+        if(Input.GetButton("Jump"))
         {
 
-            if (rocketForce < maxForce)
-            {
-                
-                rocketForce += chargingSpeed * Time.deltaTime;
-                
-
-            }
-            
-            
-        }else if (Input.GetButtonUp("Jump"))
-        {
-
-            Fire();
-            rocketForce = 500f;
+            GameManager.instance.ChargeShot();
 
         }
+        
+        if (Input.GetButtonUp("Jump"))
+        {
+
+            GameManager.instance.Fire();
+
+            
+        }
+
 
     }
 
-    void Fire()
-    {
-        
-        Quaternion rocketRotation = new Quaternion();
-        rocketRotation.eulerAngles = new Vector3(-90f, 0f, 0f);
-        GameObject rocket = Instantiate(rocketPrefab, rocketSpawner.transform.position, rocketRotation);
-        rocket.GetComponent<Rigidbody>().AddForce(rocketSpawner.transform.forward * rocketForce);
-        
-    }
 }
