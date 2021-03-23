@@ -31,13 +31,14 @@ public class RocketFactory : MonoBehaviour
     public void RelocateBullet(int currentPlayer){
 
         
-        if(currentPlayer == 1){
+        if(currentPlayer == 0){
 
-            _RelocateBullet(player2RocketSpawner.transform);
+           _RelocateBullet(player1RocketSpawner.transform);
            
         }else{
 
-            _RelocateBullet(player1RocketSpawner.transform);
+           
+              _RelocateBullet(player2RocketSpawner.transform);
             
         }
 
@@ -46,13 +47,14 @@ public class RocketFactory : MonoBehaviour
     public void Fire(int currentPlayer){
 
         rocket.GetComponent<Rigidbody>().useGravity = true;
-        if(currentPlayer == 1){
+        if(currentPlayer == 0){
 
-             rocket.GetComponent<Rigidbody>().AddForce(Quaternion.Euler(-90f, 0, 0) * rocket.transform.forward * rocketForce);
-            
+            rocket.GetComponent<Rigidbody>().AddForce(Quaternion.Euler(90f, 0, 0) * rocket.transform.forward * rocketForce);
+
         }else{
 
-             rocket.GetComponent<Rigidbody>().AddForce(Quaternion.Euler(90f, 0, 0) * rocket.transform.forward * rocketForce);
+            rocket.GetComponent<Rigidbody>().AddForce(Quaternion.Euler(-90f, 0, 0) * rocket.transform.forward * rocketForce);
+            
 
         }
 
@@ -60,13 +62,15 @@ public class RocketFactory : MonoBehaviour
        
     }
 
-    public void ChargeShot(){
+    public float ChargeShot(){
 
         if(rocketForce < maxForce){
 
             rocketForce += chargingSpeed * Time.deltaTime;
 
         }
+
+        return rocketForce / maxForce;
        
     }
     

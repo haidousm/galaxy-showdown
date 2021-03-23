@@ -15,6 +15,13 @@ public class TurnManager : MonoBehaviour
         
     }
 
+    public void DisablePlayers(){
+
+        player1.GetComponent<PlayerScript>().enabled = false;
+        player2.GetComponent<PlayerScript>().enabled = false;
+
+    }
+
     public int SwitchPlayer(){
         
         if(currentPlayer == 0){
