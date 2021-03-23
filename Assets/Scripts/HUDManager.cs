@@ -23,5 +23,19 @@ public class HUDManager : MonoBehaviour
 
     }
 
+    public void DecreaseHealth(int currentPlayer, float fillAmount){
+
+        if(currentPlayer == 0){
+
+            player1HUD.transform.Find("HealthBar").GetComponent<Image>().fillAmount = fillAmount;
+
+        }else{
+
+            player2HUD.transform.Find("HealthBar").GetComponent<Image>().fillAmount = fillAmount;
+
+        }
+
+    }
+
     
 }

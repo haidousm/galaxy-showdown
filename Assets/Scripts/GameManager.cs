@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour
 
     public HUDManager HUDManager;
     public TurnManager turnManager;
+    public ShipManager shipManager;
     public RocketFactory rocketFactory;
+
+    public GameObject overHeadCamera;
 
     private int currentPlayer;
 
@@ -30,6 +33,8 @@ public class GameManager : MonoBehaviour
 
         currentPlayer = turnManager.SwitchPlayer();
         rocketFactory.RelocateBullet(currentPlayer);
+
+        overHeadCamera.SetActive(false);
         
     }
 
@@ -44,7 +49,7 @@ public class GameManager : MonoBehaviour
         rocketFactory.Fire(currentPlayer);
         HUDManager.ChargeUp(currentPlayer, 1);
         turnManager.DisablePlayers();
-        
+
         yield return new WaitForSeconds(3);
         currentPlayer = turnManager.SwitchPlayer();
         rocketFactory.RelocateBullet(currentPlayer);
@@ -55,6 +60,19 @@ public class GameManager : MonoBehaviour
 
         float currentChargeRatio = rocketFactory.ChargeShot();
         HUDManager.ChargeUp(currentPlayer, currentChargeRatio);
+
+    }
+
+    public void DamageShip(int _currentPlayer, float damagePoints){
+
+        float currentHealthRatio = shipManager.DamageShip(_currentPlayer, damagePoints);
+        HUDManager.DecreaseHealth(_currentPlayer, currentHealthRatio);
+    }
+
+    public void GameOver(){
+
+        turnManager.DisableCameras();
+        overHeadCamera.SetActive(true);
 
     }
 

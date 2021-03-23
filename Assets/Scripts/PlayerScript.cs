@@ -10,8 +10,9 @@ public class PlayerScript : MonoBehaviour
     
     public GameObject playerCamera;
 
-    private float rotationSpeed = 100f;
+    public float healthPoints = 100f;
     
+    private float rotationSpeed = 100f;
 
 
     void Update()
@@ -37,6 +38,7 @@ public class PlayerScript : MonoBehaviour
 
             
         }
+
 
     }
 
