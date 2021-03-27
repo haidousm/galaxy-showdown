@@ -29,6 +29,13 @@ public class TurnManager : MonoBehaviour
 
     }
 
+     public void EnableCameras(){
+
+        player1.GetComponent<PlayerScript>().playerCamera.SetActive(true);
+        player2.GetComponent<PlayerScript>().playerCamera.SetActive(true);
+
+    }
+
     public int SwitchPlayer(){
         
         if(currentPlayer == 0){

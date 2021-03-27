@@ -49,10 +49,12 @@ public class GameManager : MonoBehaviour
         rocketFactory.Fire(currentPlayer);
         HUDManager.ChargeUp(currentPlayer, 1);
         turnManager.DisablePlayers();
-
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(0.3f);
+        EnableOverHead();
+        yield return new WaitForSeconds(3);
         currentPlayer = turnManager.SwitchPlayer();
         rocketFactory.RelocateBullet(currentPlayer);
+        DisableOverHead();
 
 
     }
@@ -70,10 +72,17 @@ public class GameManager : MonoBehaviour
         HUDManager.DecreaseHealth(_currentPlayer, currentHealthRatio);
     }
 
-    public void GameOver(){
+    public void EnableOverHead(){
 
         turnManager.DisableCameras();
         overHeadCamera.SetActive(true);
+
+    }
+
+    public void DisableOverHead(){
+
+        turnManager.EnableCameras();
+        overHeadCamera.SetActive(false);
 
     }
 
