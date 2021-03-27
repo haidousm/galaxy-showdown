@@ -41,5 +41,15 @@ public class HUDManager : MonoBehaviour
 
     }
 
+    public void Restart(){
+
+        player1HUD.transform.Find("HealthBar").GetComponent<Image>().fillAmount = 1;
+        player1EnemyHUD.transform.Find("HealthBar").GetComponent<Image>().fillAmount = 1;
+
+        player2HUD.transform.Find("HealthBar").GetComponent<Image>().fillAmount = 1;
+        player2EnemyHUD.transform.Find("HealthBar").GetComponent<Image>().fillAmount = 1;
+
+    }
+
     
 }

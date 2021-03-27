@@ -95,4 +95,13 @@ public class ShipManager : MonoBehaviour
 
     }
 
+    public void Restart(){
+
+        player1Ship.GetComponent<PlayerScript>().healthPoints = maxHealth;
+        player2Ship.GetComponent<PlayerScript>().healthPoints = maxHealth;
+
+       
+
+    }
+
 }

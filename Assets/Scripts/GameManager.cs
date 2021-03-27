@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame(){
 
+        RestartGame();
         currentPlayer = turnManager.SwitchPlayer();
         rocketFactory.RelocateRocket(currentPlayer);
 
@@ -106,16 +107,18 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void ActivateShield(int _currentPlayer){
+    public void RestartGame(){
 
-        shipManager.ActivateShield(_currentPlayer);
+        HUDManager.Restart();
+        shipManager.Restart();
 
-    }
+        GameObject[] effects = GameObject.FindGameObjectsWithTag("VFX");
+        for(int i = 0 ; i < effects.Length; i++){
 
-    public void DeactivateShield(int _currentPlayer){
+            Destroy(effects[i]);
 
-        shipManager.DeactivateShield(_currentPlayer);
-
+        }
+        
     }
 
     public void GameOver(){
