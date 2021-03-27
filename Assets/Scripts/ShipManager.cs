@@ -41,4 +41,38 @@ public class ShipManager : MonoBehaviour
 
     }
 
+    public void ActivateShield(int currentPlayer){
+
+        if(currentPlayer == 0){
+
+            player1Ship.transform.Find("Shield").gameObject.SetActive(true);
+            player1Ship.tag = "Untagged";
+           
+        }else{
+
+            player2Ship.transform.Find("Shield").gameObject.SetActive(true);
+            player2Ship.tag = "Untagged";
+        }
+
+
+    }
+
+    public void DeactivateShield(int currentPlayer){
+
+        if(currentPlayer == 0){
+
+            player1Ship.transform.Find("Shield").gameObject.SetActive(true);
+            player1Ship.tag = "Ship_1";
+
+           
+        }else{
+
+            player2Ship.transform.Find("Shield").gameObject.SetActive(true);
+            player2Ship.tag = "Ship_1";
+
+        }
+
+
+    }
+
 }

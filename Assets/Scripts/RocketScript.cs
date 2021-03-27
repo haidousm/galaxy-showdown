@@ -7,7 +7,6 @@ public class RocketScript : MonoBehaviour
     public float damagePoints = 40f;
     private void OnCollisionEnter(Collision other) {
 
-         
         if(other.gameObject.tag == "Ship_1"){
 
             GameManager.instance.DamageShip(0, -damagePoints);

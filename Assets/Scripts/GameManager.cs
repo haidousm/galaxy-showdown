@@ -50,9 +50,10 @@ public class GameManager : MonoBehaviour
         HUDManager.ChargeUp(currentPlayer, 1);
         turnManager.DisablePlayers();
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         currentPlayer = turnManager.SwitchPlayer();
         rocketFactory.RelocateBullet(currentPlayer);
+
 
     }
 
@@ -73,6 +74,18 @@ public class GameManager : MonoBehaviour
 
         turnManager.DisableCameras();
         overHeadCamera.SetActive(true);
+
+    }
+
+    public void ActivateShield(int _currentPlayer){
+
+        shipManager.ActivateShield(_currentPlayer);
+
+    }
+
+    public void DeactivateShield(int _currentPlayer){
+
+        shipManager.DeactivateShield(_currentPlayer);
 
     }
 

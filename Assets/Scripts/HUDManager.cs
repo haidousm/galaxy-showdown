@@ -8,6 +8,8 @@ public class HUDManager : MonoBehaviour
 
     public GameObject player1HUD;
     public GameObject player2HUD;
+    public GameObject player1EnemyHUD;
+    public GameObject player2EnemyHUD;
 
     public void ChargeUp(int currentPlayer, float fillAmount){
 
@@ -28,10 +30,12 @@ public class HUDManager : MonoBehaviour
         if(currentPlayer == 0){
 
             player1HUD.transform.Find("HealthBar").GetComponent<Image>().fillAmount = fillAmount;
+            player2EnemyHUD.transform.Find("HealthBar").GetComponent<Image>().fillAmount = fillAmount;
 
         }else{
 
             player2HUD.transform.Find("HealthBar").GetComponent<Image>().fillAmount = fillAmount;
+            player1EnemyHUD.transform.Find("HealthBar").GetComponent<Image>().fillAmount = fillAmount;
 
         }
 
