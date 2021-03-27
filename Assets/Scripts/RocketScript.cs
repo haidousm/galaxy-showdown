@@ -4,9 +4,23 @@ using UnityEngine;
 
 public class RocketScript : MonoBehaviour
 {
-    public float damagePoints = 40f;
-    private void OnCollisionEnter(Collision other) {
 
+    public GameObject smallExplosion;
+    public GameObject smokeEffect;
+
+    public float damagePoints = 40f;
+    
+    private IEnumerator OnCollisionEnter(Collision other) {
+
+
+        //other.gameObject.GetComponent<Rigidbody>().AddExplosionForce(power, transform.position, radius, 3.0F);
+        GameObject explosion = Instantiate(smallExplosion, transform.position, Quaternion.identity);
+        Instantiate(smokeEffect, transform.position, Quaternion.identity);
+        gameObject.GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(0.3f);
+        Destroy(explosion);
+
+        
         if(other.gameObject.tag == "Ship_1"){
 
             GameManager.instance.DamageShip(0, -damagePoints);
@@ -16,6 +30,7 @@ public class RocketScript : MonoBehaviour
             GameManager.instance.DamageShip(1, -damagePoints);
 
         }
+        
 
     }
 

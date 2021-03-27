@@ -51,10 +51,22 @@ public class GameManager : MonoBehaviour
         turnManager.DisablePlayers();
         yield return new WaitForSeconds(0.3f);
         EnableOverHead();
-        yield return new WaitForSeconds(3);
+        for (int i = 0; i < 6; i++)
+        {
+
+            if(Input.anyKey){
+
+                break;
+
+            }
+
+            yield return new WaitForSeconds(0.5f);
+        }
+        
+        yield return new WaitForSeconds(0.3f);
         currentPlayer = turnManager.SwitchPlayer();
-        rocketFactory.RelocateRocket(currentPlayer);
         DisableOverHead();
+        rocketFactory.RelocateRocket(currentPlayer);
 
 
     }
