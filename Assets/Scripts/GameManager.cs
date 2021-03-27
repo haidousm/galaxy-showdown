@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public RocketFactory rocketFactory;
 
     public GameObject overHeadCamera;
+    public GameObject menu;
 
     private int currentPlayer;
 
@@ -130,6 +131,8 @@ public class GameManager : MonoBehaviour
         EnableOverHead();
         shipManager.Blow(currentPlayer);
         gameObject.GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(1f);
+        menu.gameObject.SetActive(true);
 
     }
 
