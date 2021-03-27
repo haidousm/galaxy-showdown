@@ -9,10 +9,13 @@ public class RocketFactory : MonoBehaviour
     public GameObject player1RocketSpawner;
     public GameObject player2RocketSpawner;
 
+    public GameObject ship1RocketForward;
+    public GameObject ship2RocketForward;
+
     private float rocketForce = 200f;
-    private float chargingSpeed = 400f;
+    private float chargingSpeed = 1000f;
     private float minForce = 200f;
-    private float maxForce = 2000f;
+    private float maxForce = 5000f;
     
 
     private void _RelocateBullet(Transform newTransform){
@@ -49,11 +52,11 @@ public class RocketFactory : MonoBehaviour
         rocket.GetComponent<Rigidbody>().useGravity = true;
         if(currentPlayer == 0){
 
-            rocket.GetComponent<Rigidbody>().AddForce(Quaternion.Euler(90f, 0, 0) * rocket.transform.forward * rocketForce);
+            rocket.GetComponent<Rigidbody>().AddForce(ship1RocketForward.transform.forward * rocketForce);
 
         }else{
 
-            rocket.GetComponent<Rigidbody>().AddForce(Quaternion.Euler(-90f, 0, 0) * rocket.transform.forward * rocketForce);
+            rocket.GetComponent<Rigidbody>().AddForce(ship2RocketForward.transform.forward * rocketForce);
             
 
         }
