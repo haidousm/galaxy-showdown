@@ -18,7 +18,7 @@ public class RocketFactory : MonoBehaviour
     private float maxForce = 5000f;
     
 
-    private void _RelocateBullet(Transform newTransform){
+    private void _RelocateRocket(Transform newTransform){
         
         rocket.transform.parent = newTransform;
         rocket.GetComponent<Rigidbody>().useGravity = false;
@@ -31,17 +31,17 @@ public class RocketFactory : MonoBehaviour
         rocket.transform.rotation = newTransform.rotation;
     }
 
-    public void RelocateBullet(int currentPlayer){
+    public void RelocateRocket(int currentPlayer){
 
         
         if(currentPlayer == 0){
 
-           _RelocateBullet(player1RocketSpawner.transform);
+           _RelocateRocket(player1RocketSpawner.transform);
            
         }else{
 
            
-              _RelocateBullet(player2RocketSpawner.transform);
+              _RelocateRocket(player2RocketSpawner.transform);
             
         }
 

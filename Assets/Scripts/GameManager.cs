@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     void Start() {
 
         currentPlayer = turnManager.SwitchPlayer();
-        rocketFactory.RelocateBullet(currentPlayer);
+        rocketFactory.RelocateRocket(currentPlayer);
 
         overHeadCamera.SetActive(false);
         
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         EnableOverHead();
         yield return new WaitForSeconds(3);
         currentPlayer = turnManager.SwitchPlayer();
-        rocketFactory.RelocateBullet(currentPlayer);
+        rocketFactory.RelocateRocket(currentPlayer);
         DisableOverHead();
 
 
