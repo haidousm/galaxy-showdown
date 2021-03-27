@@ -7,6 +7,9 @@ public class ShipManager : MonoBehaviour
     public GameObject player1Ship;
     public GameObject player2Ship;
 
+    public GameObject hugeExplosion;
+    public GameObject hugeFire;
+
     private float minHealth = 0;
     private float maxHealth = 100;
 
@@ -19,7 +22,8 @@ public class ShipManager : MonoBehaviour
             if(player1Ship.GetComponent<PlayerScript>().healthPoints <= minHealth){
 
                // player1Ship.GetComponent<Animator>().enabled = true;
-                GameManager.instance.EnableOverHead();
+
+                GameManager.instance.GameOver();
 
             }
 
@@ -31,8 +35,7 @@ public class ShipManager : MonoBehaviour
 
             if(player2Ship.GetComponent<PlayerScript>().healthPoints <= minHealth){
 
-                //player2Ship.GetComponent<Animator>().enabled = true;
-                GameManager.instance.EnableOverHead();
+                GameManager.instance.GameOver();
 
             }
 
@@ -72,6 +75,23 @@ public class ShipManager : MonoBehaviour
 
         }
 
+
+    }
+
+    public void Blow(int currentPlayer){
+
+        if(currentPlayer == 0){
+
+            Instantiate(hugeExplosion, player2Ship.transform.position, Quaternion.identity);
+            Instantiate(hugeFire, player2Ship.transform.position, Quaternion.identity);
+           
+            
+        }else{
+
+            Instantiate(hugeExplosion, player1Ship.transform.position, Quaternion.identity);
+            Instantiate(hugeFire, player1Ship.transform.position, Quaternion.identity);
+
+        }
 
     }
 

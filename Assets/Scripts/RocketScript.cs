@@ -20,7 +20,6 @@ public class RocketScript : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         Destroy(explosion);
 
-        
         if(other.gameObject.tag == "Ship_1"){
 
             GameManager.instance.DamageShip(0, -damagePoints);

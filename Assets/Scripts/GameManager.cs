@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     private int currentPlayer;
 
+    private bool gameOver = false;
+
     void Awake() {
 
         if(instance == null){
@@ -29,13 +31,13 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void Start() {
+    public void StartGame(){
 
         currentPlayer = turnManager.SwitchPlayer();
         rocketFactory.RelocateRocket(currentPlayer);
 
         overHeadCamera.SetActive(false);
-        
+
     }
 
     public void Fire(){
@@ -64,6 +66,11 @@ public class GameManager : MonoBehaviour
         }
         
         yield return new WaitForSeconds(0.3f);
+        if(gameOver){
+
+            yield break;
+
+        }
         currentPlayer = turnManager.SwitchPlayer();
         DisableOverHead();
         rocketFactory.RelocateRocket(currentPlayer);
@@ -107,6 +114,22 @@ public class GameManager : MonoBehaviour
     public void DeactivateShield(int _currentPlayer){
 
         shipManager.DeactivateShield(_currentPlayer);
+
+    }
+
+    public void GameOver(){
+
+        gameOver = true;
+        StartCoroutine("_GameOver");
+
+    }
+
+    private IEnumerator _GameOver(){
+
+        yield return new WaitForSeconds(0.3f);
+        EnableOverHead();
+        shipManager.Blow(currentPlayer);
+        gameObject.GetComponent<AudioSource>().Play();
 
     }
 
