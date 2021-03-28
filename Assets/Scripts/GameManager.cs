@@ -64,11 +64,11 @@ public class GameManager : MonoBehaviour
         rocketFactory.Fire(currentPlayer);
         HUDManager.ChargeUp(currentPlayer, 1);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
 
         EnableOverHead();
 
-        yield return new WaitForSeconds(4.7f);
+        yield return new WaitForSeconds(5f);
         if(gameOver){
 
             yield break;
@@ -87,12 +87,12 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void DamageShip(float damagePoints){
+    public void DamageShip(int player, float damagePoints){
 
-        int opponent = currentPlayer == 0 ? 1 : 0;
+     
 
-        float currentHealthRatio = shipManager.DamageShip(opponent, damagePoints);
-        HUDManager.DecreaseHealth(opponent, currentHealthRatio);
+        float currentHealthRatio = shipManager.DamageShip(player, damagePoints);
+        HUDManager.DecreaseHealth(player, currentHealthRatio);
 
     }
 
