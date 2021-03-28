@@ -56,8 +56,8 @@ public class TurnManager : MonoBehaviour
         
         player1Time = 5;
         player2Time = 5;
-        GameManager.instance.UpdateHUDTimer(0, player1Time);
-        GameManager.instance.UpdateHUDTimer(1, player2Time);
+        // GameManager.instance.UpdateHUDTimer(0, player1Time);
+        // GameManager.instance.UpdateHUDTimer(1, player2Time);
 
         numberOfTurns++;
         if(numberOfTurns > maxTurns){
@@ -77,22 +77,22 @@ public class TurnManager : MonoBehaviour
             player1.GetComponent<PlayerScript>().playerCamera.SetActive(false);
             player2.GetComponent<PlayerScript>().playerCamera.SetActive(true);
 
-            while(player2Time > 0){
+            // while(player2Time > 0){
 
-                if(Input.GetButton("Jump")){
+            //     if(Input.GetButton("Jump")){
 
-                    yield break;
+            //         yield break;
 
-                }
+            //     }
                 
 
-                yield return new WaitForSeconds(1f);
-                player2Time--;
-                GameManager.instance.UpdateHUDTimer(1, player2Time);
+            //     yield return new WaitForSeconds(1f);
+            //     player2Time--;
+            //     GameManager.instance.UpdateHUDTimer(1, player2Time);
 
-            }
+            // }
 
-            SwitchPlayer();
+            // SwitchPlayer();
 
         }else{
 
@@ -104,28 +104,28 @@ public class TurnManager : MonoBehaviour
             player1.GetComponent<PlayerScript>().playerCamera.SetActive(true);
             player2.GetComponent<PlayerScript>().playerCamera.SetActive(false);
 
-            while(player1Time > 0){
+            // while(player1Time > 0){
 
-                if(Input.GetButton("Jump")){
+            //     if(Input.GetButton("Jump")){
 
                    
-                    yield break;
+            //         yield break;
 
-                }
+            //     }
                 
-                yield return new WaitForSeconds(1f);
-                player1Time--;
-                GameManager.instance.UpdateHUDTimer(0, player1Time);
+            //     yield return new WaitForSeconds(1f);
+            //     player1Time--;
+            //     GameManager.instance.UpdateHUDTimer(0, player1Time);
 
-            }
+            // }
 
-            SwitchPlayer();
+            // SwitchPlayer();
         }
 
 
     }
 
-    public int UpdateScore(int currentPlayer, int scoreKey){
+    public int UpdateScore(int scoreKey){
 
         //0: hit
         //1: blew up

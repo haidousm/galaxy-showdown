@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject overHeadCamera;
     public GameObject menu;
-
     private int currentPlayer;
 
     private bool gameOver = false;
@@ -37,8 +36,8 @@ public class GameManager : MonoBehaviour
     public void StartGame(){
 
         RestartGame();
-        currentPlayer = turnManager.SwitchPlayer();
-        rocketFactory.RelocateRocket(currentPlayer);
+        // currentPlayer = turnManager.SwitchPlayer();
+        // rocketFactory.RelocateRocket(currentPlayer);
 
         overHeadCamera.SetActive(false);
 
@@ -52,18 +51,23 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator _Fire(){
 
+        turnManager.DisablePlayers();
+
         rocketFactory.Fire(currentPlayer);
         HUDManager.ChargeUp(currentPlayer, 1);
-        turnManager.DisablePlayers();
+
         yield return new WaitForSeconds(0.3f);
+
         EnableOverHead();
-        yield return new WaitForSeconds(4f);
+
+        yield return new WaitForSeconds(4.7f);
         if(gameOver){
 
             yield break;
 
         }
-        currentPlayer = turnManager.SwitchPlayer();
+
+        // currentPlayer = turnManager.SwitchPlayer();
         DisableOverHead();
         RelocateRocket();
 
@@ -76,10 +80,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void DamageShip(int _currentPlayer, float damagePoints){
+    public void DamageShip(float damagePoints){
 
-        float currentHealthRatio = shipManager.DamageShip(_currentPlayer, damagePoints);
-        HUDManager.DecreaseHealth(_currentPlayer, currentHealthRatio);
+        int opponent = currentPlayer == 0 ? 1 : 0;
+
+        float currentHealthRatio = shipManager.DamageShip(opponent, damagePoints);
+        HUDManager.DecreaseHealth(opponent, currentHealthRatio);
+
     }
 
     public void EnableOverHead(){
@@ -116,6 +123,7 @@ public class GameManager : MonoBehaviour
 
         // 0: enemy destroyed
         // 1: turns exhausted
+
         gameOver = true;
         StartCoroutine(_GameOver(overReason));
 
@@ -129,14 +137,17 @@ public class GameManager : MonoBehaviour
 
         int winner = turnManager.GetWinner();
         yield return new WaitForSeconds(0.3f);
+
         EnableOverHead();
+
         if(overReason == 0){
 
             shipManager.Blow(currentPlayer);
             gameObject.GetComponent<AudioSource>().Play();
 
         }
-        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(0.5f);
         menu.gameObject.SetActive(true);
 
         if(winner != -1){
@@ -147,16 +158,16 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void UpdateHUDTimer(int _currentPlayer, int secondsRemaining){
+    public void UpdateHUDTimer(int secondsRemaining){
 
-        HUDManager.UpdateTimer(_currentPlayer, secondsRemaining);
+        // HUDManager.UpdateTimer(secondsRemaining);
 
     }
 
-    public void UpdateScore(int _currentPlayer, int scoreKey){
+    public void UpdateScore(int scoreKey){
 
-        int newScore = turnManager.UpdateScore(_currentPlayer, scoreKey);
-        HUDManager.UpdateScore(_currentPlayer, newScore);
+        int newScore = turnManager.UpdateScore(scoreKey);
+        HUDManager.UpdateScore(currentPlayer, newScore);
         
     }
 
@@ -166,15 +177,15 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void GrantPowerUp(int _currentPlayer){
+    public void GrantPowerUp(){
 
-        powerUpManager.GrantPowerUp(_currentPlayer);
+        powerUpManager.GrantPowerUp();
 
     }
 
-    public void MeteorRocket(int _currentPlayer, int powerUp){
+    public void MeteorRocket(int powerUp){
 
-        rocketFactory.MeteorRocket(_currentPlayer, powerUp);
+        rocketFactory.MeteorRocket(currentPlayer, powerUp);
         
     }
 

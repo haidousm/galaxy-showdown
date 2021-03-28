@@ -21,7 +21,6 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
     
-
         float rotatorZPos = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
         float launcherXPos = -Input.GetAxis("Vertical") * rotationSpeed * Time.deltaTime;
 
