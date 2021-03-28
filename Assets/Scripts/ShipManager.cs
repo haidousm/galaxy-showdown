@@ -23,7 +23,7 @@ public class ShipManager : MonoBehaviour
 
                // player1Ship.GetComponent<Animator>().enabled = true;
 
-                GameManager.instance.GameOver();
+                GameManager.instance.GameOver(0);
 
             }
 
@@ -35,7 +35,7 @@ public class ShipManager : MonoBehaviour
 
             if(player2Ship.GetComponent<PlayerScript>().healthPoints <= minHealth){
 
-                GameManager.instance.GameOver();
+                GameManager.instance.GameOver(0);
 
             }
 

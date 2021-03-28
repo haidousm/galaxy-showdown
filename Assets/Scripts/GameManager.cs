@@ -121,19 +121,25 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void GameOver(){
+    public void GameOver(int overReason){
 
+        // 0: enemy destroyed
+        // 1: turns exhausted
         gameOver = true;
-        StartCoroutine("_GameOver");
+        StartCoroutine(_GameOver(overReason));
 
     }
 
-    private IEnumerator _GameOver(){
+    private IEnumerator _GameOver(int overReason){
 
         yield return new WaitForSeconds(0.3f);
         EnableOverHead();
-        //shipManager.Blow(currentPlayer);
-        //gameObject.GetComponent<AudioSource>().Play();
+        if(overReason == 0){
+
+            shipManager.Blow(currentPlayer);
+            gameObject.GetComponent<AudioSource>().Play();
+
+        }
         yield return new WaitForSeconds(1f);
         menu.gameObject.SetActive(true);
 

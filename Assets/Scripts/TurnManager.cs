@@ -12,7 +12,7 @@ public class TurnManager : MonoBehaviour
     private int player2Time = 5;
 
     private int numberOfTurns = 0;
-    private int maxTurns = 3;
+    private int maxTurns = 6;
 
     void Start()
     {
@@ -59,7 +59,7 @@ public class TurnManager : MonoBehaviour
         numberOfTurns++;
         if(numberOfTurns > maxTurns){
 
-            GameManager.instance.GameOver();
+            GameManager.instance.GameOver(1);
             yield break;
 
         }
