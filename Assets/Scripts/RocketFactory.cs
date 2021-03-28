@@ -52,6 +52,7 @@ public class RocketFactory : MonoBehaviour
     public void Fire(int currentPlayer){
 
         rocket.GetComponent<Rigidbody>().useGravity = true;
+        rocket.SetActive(true);
         if(currentPlayer == 0){
 
             rocket.GetComponent<Rigidbody>().AddForce(ship1RocketForward.transform.forward * rocketForce);

@@ -47,6 +47,8 @@ public class TurnManager : MonoBehaviour
 
     public int SwitchPlayer(){
 
+        currentPlayer = currentPlayer == 0 ? 1 : 0;
+
         StartCoroutine("_SwitchPlayer");
         return currentPlayer;
 
@@ -56,8 +58,7 @@ public class TurnManager : MonoBehaviour
         
         player1Time = 5;
         player2Time = 5;
-        // GameManager.instance.UpdateHUDTimer(0, player1Time);
-        // GameManager.instance.UpdateHUDTimer(1, player2Time);
+        GameManager.instance.UpdateHUDTimer(5);
 
         numberOfTurns++;
         if(numberOfTurns > maxTurns){
@@ -69,7 +70,29 @@ public class TurnManager : MonoBehaviour
 
         if(currentPlayer == 0){
 
-            currentPlayer = 1;
+            player1.GetComponent<PlayerScript>().enabled = true;
+            player2.GetComponent<PlayerScript>().enabled = false;
+
+            player1.GetComponent<PlayerScript>().playerCamera.SetActive(true);
+            player2.GetComponent<PlayerScript>().playerCamera.SetActive(false);
+
+            while(player1Time > 0){
+
+                if(Input.GetButton("Jump")){
+
+                   
+                    yield break;
+
+                }
+                
+                yield return new WaitForSeconds(1f);
+                player1Time--;
+                GameManager.instance.UpdateHUDTimer(player1Time);
+            }
+
+       
+
+        }else{
 
             player1.GetComponent<PlayerScript>().enabled = false;
             player2.GetComponent<PlayerScript>().enabled = true;
@@ -77,50 +100,25 @@ public class TurnManager : MonoBehaviour
             player1.GetComponent<PlayerScript>().playerCamera.SetActive(false);
             player2.GetComponent<PlayerScript>().playerCamera.SetActive(true);
 
-            // while(player2Time > 0){
+            while(player2Time > 0){
 
-            //     if(Input.GetButton("Jump")){
+                if(Input.GetButton("Jump")){
 
-            //         yield break;
+                    yield break;
 
-            //     }
+                }
                 
 
-            //     yield return new WaitForSeconds(1f);
-            //     player2Time--;
-            //     GameManager.instance.UpdateHUDTimer(1, player2Time);
+                yield return new WaitForSeconds(1f);
+                player2Time--;
+                GameManager.instance.UpdateHUDTimer(player2Time);
 
-            // }
+            }
 
-            // SwitchPlayer();
 
-        }else{
-
-            currentPlayer = 0;
-
-            player1.GetComponent<PlayerScript>().enabled = true;
-            player2.GetComponent<PlayerScript>().enabled = false;
-
-            player1.GetComponent<PlayerScript>().playerCamera.SetActive(true);
-            player2.GetComponent<PlayerScript>().playerCamera.SetActive(false);
-
-            // while(player1Time > 0){
-
-            //     if(Input.GetButton("Jump")){
-
-                   
-            //         yield break;
-
-            //     }
-                
-            //     yield return new WaitForSeconds(1f);
-            //     player1Time--;
-            //     GameManager.instance.UpdateHUDTimer(0, player1Time);
-
-            // }
-
-            // SwitchPlayer();
         }
+
+        GameManager.instance.SwitchPlayer();
 
 
     }

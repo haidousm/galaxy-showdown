@@ -25,7 +25,7 @@ public class RocketScript : MonoBehaviour
 
             GameObject explosion = Instantiate(smallExplosion, transform.position, Quaternion.identity);
             gameObject.GetComponent<AudioSource>().Play();
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.5f);
             Destroy(explosion);
         }
 
@@ -41,19 +41,14 @@ public class RocketScript : MonoBehaviour
 
         // }
 
-        // GameManager.instance.RelocateRocket();
-
-        if(other.gameObject.tag == "Ship_1"){
-
-            GameManager.instance.DamageShip(damagePoints);
-            GameManager.instance.UpdateScore(0);
-
-        }else if(other.gameObject.tag == "Ship_2"){
+        if(other.gameObject.tag == "Ship_1" || other.gameObject.tag == "Ship_2"){
 
             GameManager.instance.DamageShip(damagePoints);
             GameManager.instance.UpdateScore(0);
 
         }
+
+
         // }else if(other.gameObject.tag == "Large_Drone"){
 
         //     GameObject drone = other.gameObject.transform.Find("Drone").gameObject;
@@ -82,6 +77,7 @@ public class RocketScript : MonoBehaviour
        
         // }
 
+        gameObject.SetActive(false);
         damagePoints = 20;
 
     }

@@ -36,12 +36,20 @@ public class GameManager : MonoBehaviour
     public void StartGame(){
 
         RestartGame();
-        // currentPlayer = turnManager.SwitchPlayer();
-        // rocketFactory.RelocateRocket(currentPlayer);
+        SwitchPlayer();
+       
 
         overHeadCamera.SetActive(false);
 
     }
+
+    public void SwitchPlayer(){
+
+        currentPlayer = turnManager.SwitchPlayer();
+        RelocateRocket();
+
+    }
+
 
     public void Fire(){
 
@@ -67,9 +75,8 @@ public class GameManager : MonoBehaviour
 
         }
 
-        // currentPlayer = turnManager.SwitchPlayer();
+        SwitchPlayer();
         DisableOverHead();
-        RelocateRocket();
 
     }
 
@@ -160,7 +167,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateHUDTimer(int secondsRemaining){
 
-        // HUDManager.UpdateTimer(secondsRemaining);
+        HUDManager.UpdateTimer(currentPlayer, secondsRemaining);
 
     }
 
