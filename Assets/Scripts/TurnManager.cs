@@ -11,6 +11,9 @@ public class TurnManager : MonoBehaviour
     private int player1Time = 5;
     private int player2Time = 5;
 
+    private int numberOfTurns = 0;
+    private int maxTurns = 3;
+
     void Start()
     {
 
@@ -52,6 +55,15 @@ public class TurnManager : MonoBehaviour
         player2Time = 5;
         GameManager.instance.UpdateHUDTimer(0, player1Time);
         GameManager.instance.UpdateHUDTimer(1, player2Time);
+
+        numberOfTurns++;
+        if(numberOfTurns > maxTurns){
+
+            GameManager.instance.GameOver();
+            yield break;
+
+        }
+
         if(currentPlayer == 0){
 
             currentPlayer = 1;

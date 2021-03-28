@@ -132,8 +132,8 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
         EnableOverHead();
-        shipManager.Blow(currentPlayer);
-        gameObject.GetComponent<AudioSource>().Play();
+        //shipManager.Blow(currentPlayer);
+        //gameObject.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(1f);
         menu.gameObject.SetActive(true);
 
