@@ -999,11 +999,12 @@ MonoBehaviour:
     type: 3}
   smokeEffect: {fileID: 1000012560919920, guid: 85a8865d1bf4a63478038fae23776de8,
     type: 3}
-  meteorRain: {fileID: 0}
+  meteorRain: {fileID: 1221690919802312, guid: 164d846bdf5a98d4aa9ef00d8e185531, type: 3}
+  meteorRainFX: {fileID: 8300000, guid: b666eba6339d80f4a853b562ea70aa0d, type: 3}
   damagePoints: 20
   currentPlayer: 0
-  powerUp: 1
-  powerUpPlayer: 1
+  powerUp: -1
+  powerUpPlayer: -1
 --- !u!65 &446067144
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1236,7 +1237,7 @@ GameObject:
   - component: {fileID: 454282497}
   m_Layer: 0
   m_Name: Drone_2
-  m_TagString: Powerup_Drone
+  m_TagString: Small_Drone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1321,7 +1322,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -470, y: 150}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 300, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &499316129
 MonoBehaviour:
@@ -1726,7 +1727,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652798828}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63bd5bb3a9c254147a515520fa302e86, type: 3}
   m_Name: 
@@ -4216,7 +4217,7 @@ GameObject:
   - component: {fileID: 231257187}
   m_Layer: 0
   m_Name: Drone_1
-  m_TagString: Powerup_Drone
+  m_TagString: Large_Drone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6177,7 +6178,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102041337696087970}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63bd5bb3a9c254147a515520fa302e86, type: 3}
   m_Name: 

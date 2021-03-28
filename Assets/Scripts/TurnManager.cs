@@ -12,7 +12,7 @@ public class TurnManager : MonoBehaviour
     private int player2Time = 5;
 
     private int numberOfTurns = 0;
-    private int maxTurns = 6;
+    private int maxTurns = 10;
 
     private int player1Score = 0;
     private int player2Score = 0;
@@ -139,6 +139,12 @@ public class TurnManager : MonoBehaviour
                 case 1:
                     player1Score += 250;
                     break;
+                case 2:
+                    player1Score += 150;
+                    break;
+                case 3:
+                    player1Score += 200;
+                    break;
                 default:
                     player1Score += 0;
                     break;
@@ -154,6 +160,12 @@ public class TurnManager : MonoBehaviour
                     break;
                 case 1:
                     player2Score += 250;
+                    break;
+                case 2:
+                    player2Score += 150;
+                    break;
+                case 3:
+                    player2Score += 200;
                     break;
                 default:
                     player2Score += 0;

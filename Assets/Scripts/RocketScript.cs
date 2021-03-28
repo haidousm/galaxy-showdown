@@ -15,8 +15,8 @@ public class RocketScript : MonoBehaviour
 
     public int currentPlayer = 0;
 
-    public int powerUp = 1;
-    public int powerUpPlayer = 1;
+    public int powerUp = -1;
+    public int powerUpPlayer = -1;
     
     private IEnumerator OnCollisionEnter(Collision other) {
       
@@ -34,39 +34,25 @@ public class RocketScript : MonoBehaviour
             gameObject.GetComponent<AudioSource>().PlayOneShot(meteorRainFX, 1f);
             yield return new WaitForSeconds(3f);
             Destroy(meteor);
+            powerUpPlayer = -1;
+            powerUp = -1;
+            damagePoints = 50f;
 
         }
         GameManager.instance.RelocateRocket();
 
         if(other.gameObject.tag == "Ship_1"){
 
-            if(powerUp == 1){
-
-                 GameManager.instance.DamageShip(0, 50);
-
-            }else{
-
-                GameManager.instance.DamageShip(0, damagePoints);
-
-            }
-            
+            GameManager.instance.DamageShip(0, damagePoints);
             GameManager.instance.UpdateScore(1, 0);
 
         }else if(other.gameObject.tag == "Ship_2"){
 
-            if(powerUp == 1){
-
-                GameManager.instance.DamageShip(1, -50);
-
-            }else{
-
-                GameManager.instance.DamageShip(1, damagePoints);
-
-            }
+            GameManager.instance.DamageShip(1, damagePoints);
             
             GameManager.instance.UpdateScore(0, 0);
 
-        }else if(other.gameObject.tag == "Powerup_Drone"){
+        }else if(other.gameObject.tag == "Large_Drone"){
 
             GameObject drone = other.gameObject.transform.Find("Drone").gameObject;
             Destroy(drone);
@@ -77,9 +63,24 @@ public class RocketScript : MonoBehaviour
             other.gameObject.SetActive(false);
             Destroy(smoke);
             GameManager.instance.GrantPowerUp(currentPlayer);
+            GameManager.instance.UpdateScore(currentPlayer, 3);
+       
+        }else if(other.gameObject.tag == "Small_Drone"){
+
+            GameObject drone = other.gameObject.transform.Find("Drone").gameObject;
+            Destroy(drone);
+            GameObject powerUp = other.gameObject.transform.Find("Powerup").gameObject;
+            powerUp.GetComponent<Rigidbody>().useGravity = true;
+            powerUp.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            yield return new WaitForSeconds(1f);
+            other.gameObject.SetActive(false);
+            Destroy(smoke);
+            GameManager.instance.GrantPowerUp(currentPlayer);
+            GameManager.instance.UpdateScore(currentPlayer, 2);
        
         }
-        
+
+        damagePoints = 20;
 
     }
 

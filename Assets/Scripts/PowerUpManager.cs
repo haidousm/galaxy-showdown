@@ -8,7 +8,7 @@ public class PowerUpManager : MonoBehaviour
     // -1: boss fight
     // 0: shield
     // 1: meteor shower
-    List<int> powerups = new List<int>(new int[]{-1, 0, 0, 0, 0, 1, 1});
+    List<int> powerups = new List<int>(new int[]{1, 1});
 
     public void GrantPowerUp(int currentPlayer){
 
@@ -17,7 +17,7 @@ public class PowerUpManager : MonoBehaviour
         int powerUp = powerups[powerUpIdx];
 
         powerups.RemoveAt(powerUpIdx);
-
+       
         switch (powerUp)
         {
             case -1:
@@ -28,6 +28,7 @@ public class PowerUpManager : MonoBehaviour
                 break;
             case 1:
                 GameManager.instance.MeteorRocket(currentPlayer, 1);
+                
                 break;
             default:
                 break;

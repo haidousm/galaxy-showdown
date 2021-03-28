@@ -174,8 +174,8 @@ public class GameManager : MonoBehaviour
 
     public void MeteorRocket(int _currentPlayer, int powerUp){
 
-        rocketFactory.MeteorRocket(currentPlayer, powerUp);
-
+        rocketFactory.MeteorRocket(_currentPlayer, powerUp);
+        
     }
 
    

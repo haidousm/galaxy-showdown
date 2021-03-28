@@ -8,6 +8,8 @@ TagManager:
   - Ship_2
   - VFX
   - Powerup_Drone
+  - Large_Drone
+  - Small_Drone
   layers:
   - Default
   - TransparentFX

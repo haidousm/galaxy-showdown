@@ -83,6 +83,7 @@ public class RocketFactory : MonoBehaviour
 
         rocket.GetComponent<RocketScript>().powerUpPlayer = currentPlayer;
         rocket.GetComponent<RocketScript>().powerUp = powerUp;
+       
 
     }
     
