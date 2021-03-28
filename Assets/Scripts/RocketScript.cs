@@ -7,31 +7,63 @@ public class RocketScript : MonoBehaviour
 
     public GameObject smallExplosion;
     public GameObject smokeEffect;
+    public GameObject meteorRain;
 
-    public float damagePoints = 40f;
+    public AudioClip meteorRainFX;
+
+    public float damagePoints = 20f;
 
     public int currentPlayer = 0;
+
+    public int powerUp = 1;
+    public int powerUpPlayer = 1;
     
     private IEnumerator OnCollisionEnter(Collision other) {
-
-
-        //other.gameObject.GetComponent<Rigidbody>().AddExplosionForce(power, transform.position, radius, 3.0F);
       
-        GameObject explosion = Instantiate(smallExplosion, transform.position, Quaternion.identity);
         GameObject smoke = Instantiate(smokeEffect, transform.position, Quaternion.identity);
-        gameObject.GetComponent<AudioSource>().Play();
-        yield return new WaitForSeconds(0.3f);
-        Destroy(explosion);
+        if(powerUpPlayer != currentPlayer){
+
+            GameObject explosion = Instantiate(smallExplosion, transform.position, Quaternion.identity);
+            gameObject.GetComponent<AudioSource>().Play();
+            yield return new WaitForSeconds(0.3f);
+            Destroy(explosion);
+
+        }else if(powerUp == 1 && powerUpPlayer == currentPlayer){
+
+            GameObject meteor = Instantiate(meteorRain, transform.position, Quaternion.identity);
+            gameObject.GetComponent<AudioSource>().PlayOneShot(meteorRainFX, 1f);
+            yield return new WaitForSeconds(3f);
+            Destroy(meteor);
+
+        }
         GameManager.instance.RelocateRocket();
 
         if(other.gameObject.tag == "Ship_1"){
 
-            GameManager.instance.DamageShip(0, -damagePoints);
+            if(powerUp == 1){
+
+                 GameManager.instance.DamageShip(0, 50);
+
+            }else{
+
+                GameManager.instance.DamageShip(0, damagePoints);
+
+            }
+            
             GameManager.instance.UpdateScore(1, 0);
 
         }else if(other.gameObject.tag == "Ship_2"){
 
-            GameManager.instance.DamageShip(1, -damagePoints);
+            if(powerUp == 1){
+
+                GameManager.instance.DamageShip(1, -50);
+
+            }else{
+
+                GameManager.instance.DamageShip(1, damagePoints);
+
+            }
+            
             GameManager.instance.UpdateScore(0, 0);
 
         }else if(other.gameObject.tag == "Powerup_Drone"){

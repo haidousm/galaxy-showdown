@@ -20,16 +20,11 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        
-        // if(Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical")){
-
-        //     gameObject.GetComponent<AudioSource>().PlayOneShot(launcherMovingFX, 1f);
-
-        // }
+    
 
         float rotatorZPos = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
         float launcherXPos = -Input.GetAxis("Vertical") * rotationSpeed * Time.deltaTime;
-        
+
         launcherRotator.transform.Rotate(0f, 0f, rotatorZPos);
         launcher.transform.Rotate(launcherXPos, 0f, 0f);
 

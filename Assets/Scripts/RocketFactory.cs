@@ -78,5 +78,12 @@ public class RocketFactory : MonoBehaviour
         return rocketForce / maxForce;
        
     }
+
+    public void MeteorRocket(int currentPlayer, int powerUp){
+
+        rocket.GetComponent<RocketScript>().powerUpPlayer = currentPlayer;
+        rocket.GetComponent<RocketScript>().powerUp = powerUp;
+
+    }
     
 }

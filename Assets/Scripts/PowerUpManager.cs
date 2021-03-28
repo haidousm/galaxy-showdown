@@ -7,7 +7,7 @@ public class PowerUpManager : MonoBehaviour
 {
     // -1: boss fight
     // 0: shield
-    // 1: super powerful rocket
+    // 1: meteor shower
     List<int> powerups = new List<int>(new int[]{-1, 0, 0, 0, 0, 1, 1});
 
     public void GrantPowerUp(int currentPlayer){
@@ -27,7 +27,7 @@ public class PowerUpManager : MonoBehaviour
                 // give shield to player
                 break;
             case 1:
-                // increase rocket size and power
+                GameManager.instance.MeteorRocket(currentPlayer, 1);
                 break;
             default:
                 break;

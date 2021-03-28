@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         turnManager.DisablePlayers();
         yield return new WaitForSeconds(0.3f);
         EnableOverHead();
-        yield return new WaitForSeconds(3.3f);
+        yield return new WaitForSeconds(4f);
         if(gameOver){
 
             yield break;
@@ -169,6 +169,12 @@ public class GameManager : MonoBehaviour
     public void GrantPowerUp(int _currentPlayer){
 
         powerUpManager.GrantPowerUp(_currentPlayer);
+
+    }
+
+    public void MeteorRocket(int _currentPlayer, int powerUp){
+
+        rocketFactory.MeteorRocket(currentPlayer, powerUp);
 
     }
 

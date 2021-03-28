@@ -44,6 +44,7 @@ public class DroneManager : MonoBehaviour
 
             list.Add(waypoint);
 
+
         }
 
     }
