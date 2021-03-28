@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ship_1
   - Ship_2
+  - VFX
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,9 @@ public class TurnManager : MonoBehaviour
     
     public GameObject player1, player2;
     private int currentPlayer;
+    
+    private int player1Time = 5;
+    private int player2Time = 5;
 
     void Start()
     {
@@ -37,7 +40,18 @@ public class TurnManager : MonoBehaviour
     }
 
     public int SwitchPlayer(){
+
+        StartCoroutine("_SwitchPlayer");
+        return currentPlayer;
+
+    }
+
+    public IEnumerator _SwitchPlayer(){
         
+        player1Time = 5;
+        player2Time = 5;
+        GameManager.instance.UpdateHUDTimer(0, player1Time);
+        GameManager.instance.UpdateHUDTimer(1, player2Time);
         if(currentPlayer == 0){
 
             currentPlayer = 1;
@@ -47,6 +61,23 @@ public class TurnManager : MonoBehaviour
 
             player1.GetComponent<PlayerScript>().playerCamera.SetActive(false);
             player2.GetComponent<PlayerScript>().playerCamera.SetActive(true);
+
+            while(player2Time > 0){
+
+                if(Input.GetButton("Jump")){
+
+                    yield break;
+
+                }
+                
+
+                yield return new WaitForSeconds(1f);
+                player2Time--;
+                GameManager.instance.UpdateHUDTimer(1, player2Time);
+
+            }
+
+            SwitchPlayer();
 
         }else{
 
@@ -58,9 +89,26 @@ public class TurnManager : MonoBehaviour
             player1.GetComponent<PlayerScript>().playerCamera.SetActive(true);
             player2.GetComponent<PlayerScript>().playerCamera.SetActive(false);
 
+            while(player1Time > 0){
 
+                if(Input.GetButton("Jump")){
+
+                   
+                    yield break;
+
+                }
+                
+                yield return new WaitForSeconds(1f);
+                player1Time--;
+                GameManager.instance.UpdateHUDTimer(0, player1Time);
+
+            }
+
+            SwitchPlayer();
         }
 
-        return currentPlayer;
+
     }
+
+
 }

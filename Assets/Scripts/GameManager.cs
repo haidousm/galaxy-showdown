@@ -139,5 +139,11 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void UpdateHUDTimer(int _currentPlayer, int secondsRemaining){
+
+        HUDManager.UpdateTimer(_currentPlayer, secondsRemaining);
+
+    }
+
    
 }

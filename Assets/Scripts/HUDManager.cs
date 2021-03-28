@@ -51,5 +51,19 @@ public class HUDManager : MonoBehaviour
 
     }
 
+    public void UpdateTimer(int currentPlayer, int secondsRemaining){
+
+        if(currentPlayer == 0){
+
+            player1HUD.transform.Find("TurnTimer").GetComponent<Text>().text = "00:0" + secondsRemaining;
+
+        }else{
+
+            player2HUD.transform.Find("TurnTimer").GetComponent<Text>().text = "00:0" + secondsRemaining;
+
+        }
+
+    }
+
     
 }
