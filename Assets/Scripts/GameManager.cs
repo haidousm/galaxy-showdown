@@ -56,19 +56,7 @@ public class GameManager : MonoBehaviour
         turnManager.DisablePlayers();
         yield return new WaitForSeconds(0.3f);
         EnableOverHead();
-        for (int i = 0; i < 6; i++)
-        {
-
-            if(Input.anyKey){
-
-                break;
-
-            }
-
-            yield return new WaitForSeconds(0.5f);
-        }
-        
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(3.3f);
         if(gameOver){
 
             yield break;
