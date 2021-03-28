@@ -41,9 +41,11 @@ public class RocketFactory : MonoBehaviour
         }else{
 
            
-              _RelocateRocket(player2RocketSpawner.transform);
+            _RelocateRocket(player2RocketSpawner.transform);
             
         }
+
+        rocket.GetComponent<RocketScript>().currentPlayer = currentPlayer;
 
     }
 

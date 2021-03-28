@@ -9,6 +9,8 @@ public class RocketScript : MonoBehaviour
     public GameObject smokeEffect;
 
     public float damagePoints = 40f;
+
+    public int currentPlayer = 0;
     
     private IEnumerator OnCollisionEnter(Collision other) {
 
@@ -36,12 +38,13 @@ public class RocketScript : MonoBehaviour
 
             GameObject drone = other.gameObject.transform.Find("Drone").gameObject;
             Destroy(drone);
-            GameObject powerup = other.gameObject.transform.Find("Powerup").gameObject;
-            powerup.GetComponent<Rigidbody>().useGravity = true;
-            powerup.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            GameObject powerUp = other.gameObject.transform.Find("Powerup").gameObject;
+            powerUp.GetComponent<Rigidbody>().useGravity = true;
+            powerUp.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             yield return new WaitForSeconds(1f);
             other.gameObject.SetActive(false);
             Destroy(smoke);
+            GameManager.instance.GrantPowerUp(currentPlayer);
        
         }
         

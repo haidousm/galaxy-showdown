@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public TurnManager turnManager;
     public ShipManager shipManager;
     public RocketFactory rocketFactory;
+    public PowerUpManager powerUpManager;
 
     public GameObject overHeadCamera;
     public GameObject menu;
@@ -162,6 +163,12 @@ public class GameManager : MonoBehaviour
     public void RelocateRocket(){
 
         rocketFactory.RelocateRocket(currentPlayer);
+
+    }
+
+    public void GrantPowerUp(int _currentPlayer){
+
+        powerUpManager.GrantPowerUp(_currentPlayer);
 
     }
 
