@@ -13,6 +13,7 @@ public class ShipManager : MonoBehaviour
     private float minHealth = 0;
     private float maxHealth = 100;
 
+
     public float DamageShip(int currentPlayer, float damagePoints){
        
         if(currentPlayer == 0){
@@ -46,35 +47,33 @@ public class ShipManager : MonoBehaviour
 
     public void ActivateShield(int currentPlayer){
 
+        StartCoroutine(_ActivateShield(currentPlayer));
+
+    }
+
+    private IEnumerator _ActivateShield(int currentPlayer){
+
         if(currentPlayer == 0){
 
             player1Ship.transform.Find("Shield").gameObject.SetActive(true);
             player1Ship.tag = "Untagged";
+
+            yield return new WaitForSeconds(8f);
+
+            player1Ship.transform.Find("Shield").gameObject.SetActive(false);
+            player1Ship.tag = "Ship_1";
            
         }else{
 
             player2Ship.transform.Find("Shield").gameObject.SetActive(true);
             player2Ship.tag = "Untagged";
-        }
 
+            yield return new WaitForSeconds(8f);
 
-    }
-
-    public void DeactivateShield(int currentPlayer){
-
-        if(currentPlayer == 0){
-
-            player1Ship.transform.Find("Shield").gameObject.SetActive(true);
-            player1Ship.tag = "Ship_1";
-
-           
-        }else{
-
-            player2Ship.transform.Find("Shield").gameObject.SetActive(true);
-            player2Ship.tag = "Ship_1";
+            player2Ship.transform.Find("Shield").gameObject.SetActive(false);
+            player2Ship.tag = "Ship_2";
 
         }
-
 
     }
 

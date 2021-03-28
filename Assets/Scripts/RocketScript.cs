@@ -53,20 +53,20 @@ public class RocketScript : MonoBehaviour
             GameManager.instance.DamageShip(0, damagePoints);
             GameManager.instance.UpdateScore(0);
 
-        }
-        
-        if(other.gameObject.tag == "Ship_2"){
+        }else if(other.gameObject.tag == "Ship_2"){
 
             GameManager.instance.DamageShip(1, damagePoints);
             GameManager.instance.UpdateScore(0);
 
-        }
+        }else if(other.gameObject.tag == "Large_Drone"){
 
+            Transform drone = other.gameObject.transform.Find("Drone");
+            if(drone != null){
 
-       if(other.gameObject.tag == "Large_Drone"){
+                Destroy(drone.gameObject);
 
-            GameObject drone = other.gameObject.transform.Find("Drone").gameObject;
-            Destroy(drone);
+            }
+           
             
             GameObject powerUp = other.gameObject.transform.Find("Powerup").gameObject;
 
@@ -80,9 +80,7 @@ public class RocketScript : MonoBehaviour
             GameManager.instance.UpdateScore(3);
 
 
-       }
-       
-       if(other.gameObject.tag == "Small_Drone"){
+       }else if(other.gameObject.tag == "Small_Drone"){
 
             GameObject drone = other.gameObject.transform.Find("Drone").gameObject;
             Destroy(drone);
@@ -96,6 +94,10 @@ public class RocketScript : MonoBehaviour
 
             GameManager.instance.UpdateScore(2);
        
+        }else{
+
+            Destroy(smoke);
+
         }
 
         gameObject.SetActive(false);

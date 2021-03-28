@@ -196,5 +196,11 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void ActivateShield(){
+
+        shipManager.ActivateShield(currentPlayer);
+
+    }
+
    
 }

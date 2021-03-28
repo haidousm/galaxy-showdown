@@ -8,7 +8,7 @@ public class PowerUpManager : MonoBehaviour
     // -1: boss fight
     // 0: shield
     // 1: meteor shower
-    List<int> powerups = new List<int>(new int[]{1, 1});
+    List<int> powerups = new List<int>(new int[]{-1, 0, 0, 1});
 
     public void GrantPowerUp(){
 
@@ -24,7 +24,7 @@ public class PowerUpManager : MonoBehaviour
                 // spawn boss
                 break;
             case 0:
-                // give shield to player
+                GameManager.instance.ActivateShield();
                 break;
             case 1:
                 GameManager.instance.MeteorRocket(1);
