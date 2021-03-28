@@ -65,5 +65,19 @@ public class HUDManager : MonoBehaviour
 
     }
 
+    public void UpdateScore(int currentPlayer, int newScore){
+
+         if(currentPlayer == 0){
+
+            player1HUD.transform.Find("Score").GetComponent<Text>().text = "Score: " + newScore;
+
+        }else{
+
+            player2HUD.transform.Find("Score").GetComponent<Text>().text = "Score: " + newScore;
+
+        }
+
+    }
+
     
 }

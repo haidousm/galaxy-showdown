@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -75,8 +76,7 @@ public class GameManager : MonoBehaviour
         }
         currentPlayer = turnManager.SwitchPlayer();
         DisableOverHead();
-        rocketFactory.RelocateRocket(currentPlayer);
-
+        RelocateRocket();
 
     }
 
@@ -118,6 +118,8 @@ public class GameManager : MonoBehaviour
             Destroy(effects[i]);
 
         }
+
+        menu.gameObject.transform.Find("Title").gameObject.GetComponent<Text>().text = "Galaxy Showdown";
         
     }
 
@@ -132,6 +134,11 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator _GameOver(int overReason){
 
+        // 0: Player 1
+        // 1: Player 2
+        // -1: Tie
+
+        int winner = turnManager.GetWinner();
         yield return new WaitForSeconds(0.3f);
         EnableOverHead();
         if(overReason == 0){
@@ -143,11 +150,30 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         menu.gameObject.SetActive(true);
 
+        if(winner != -1){
+
+            menu.gameObject.transform.Find("Title").GetComponent<Text>().text = "Player " + (winner + 1) + " Won";
+
+        }
+
     }
 
     public void UpdateHUDTimer(int _currentPlayer, int secondsRemaining){
 
         HUDManager.UpdateTimer(_currentPlayer, secondsRemaining);
+
+    }
+
+    public void UpdateScore(int _currentPlayer, int scoreKey){
+
+        int newScore = turnManager.UpdateScore(_currentPlayer, scoreKey);
+        HUDManager.UpdateScore(_currentPlayer, newScore);
+        
+    }
+
+    public void RelocateRocket(){
+
+        rocketFactory.RelocateRocket(currentPlayer);
 
     }
 

@@ -14,6 +14,9 @@ public class TurnManager : MonoBehaviour
     private int numberOfTurns = 0;
     private int maxTurns = 6;
 
+    private int player1Score = 0;
+    private int player2Score = 0;
+
     void Start()
     {
 
@@ -119,6 +122,63 @@ public class TurnManager : MonoBehaviour
             SwitchPlayer();
         }
 
+
+    }
+
+    public int UpdateScore(int currentPlayer, int scoreKey){
+
+        //0: hit
+        //1: blew up
+
+        if(currentPlayer == 0){
+
+            switch (scoreKey){
+                case 0:
+                    player1Score += 100;
+                    break;
+                case 1:
+                    player1Score += 250;
+                    break;
+                default:
+                    player1Score += 0;
+                    break;
+            }
+
+            return player1Score;
+
+        }else{
+
+            switch (scoreKey){
+                case 0:
+                    player2Score += 100;
+                    break;
+                case 1:
+                    player2Score += 250;
+                    break;
+                default:
+                    player2Score += 0;
+                    break;
+            }
+
+            return player2Score;
+        }
+        
+
+    }
+
+    public int GetWinner(){
+
+        if(player1Score > player2Score){
+
+            return 0;
+
+        }else if(player2Score > player1Score){
+
+            return 1;
+
+        }
+        
+        return -1;
 
     }
 
