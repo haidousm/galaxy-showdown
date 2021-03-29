@@ -75,6 +75,8 @@ public class ShipManager : MonoBehaviour
 
         }
 
+        GameManager.instance.ClearPowerups();
+
     }
 
     public void Blow(int currentPlayer){

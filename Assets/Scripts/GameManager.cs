@@ -193,12 +193,20 @@ public class GameManager : MonoBehaviour
     public void MeteorRocket(int powerUp){
 
         rocketFactory.MeteorRocket(currentPlayer, powerUp);
+        HUDManager.MeteorRocket(currentPlayer);
         
     }
 
     public void ActivateShield(){
 
         shipManager.ActivateShield(currentPlayer);
+        HUDManager.ActivateShield(currentPlayer);
+
+    }
+
+    public void ClearPowerups(){
+
+        HUDManager.ClearPowerups();
 
     }
 

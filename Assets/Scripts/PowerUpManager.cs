@@ -8,7 +8,7 @@ public class PowerUpManager : MonoBehaviour
     // -1: boss fight
     // 0: shield
     // 1: meteor shower
-    List<int> powerups = new List<int>(new int[]{-1, 0, 0, 1});
+    List<int> powerups = new List<int>(new int[]{1});
 
     public void GrantPowerUp(){
 
