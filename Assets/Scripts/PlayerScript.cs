@@ -10,6 +10,9 @@ public class PlayerScript : MonoBehaviour
     
     public GameObject playerCamera;
 
+    public AudioClip rocketLaunch;
+    public AudioClip launcherMovingFX;
+
     public float healthPoints = 100f;
     
     private float rotationSpeed = 100f;
@@ -17,13 +20,19 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-
+    
         float rotatorZPos = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
         float launcherXPos = -Input.GetAxis("Vertical") * rotationSpeed * Time.deltaTime;
-        
+
         launcherRotator.transform.Rotate(0f, 0f, rotatorZPos);
         launcher.transform.Rotate(launcherXPos, 0f, 0f);
-      
+
+        if(Input.GetButtonDown("Jump")){
+
+            gameObject.GetComponent<AudioSource>().Play();
+
+        }
+
         if(Input.GetButton("Jump"))
         {
 
@@ -35,6 +44,9 @@ public class PlayerScript : MonoBehaviour
         {
 
             GameManager.instance.Fire();
+            gameObject.GetComponent<AudioSource>().Stop();
+            gameObject.GetComponent<AudioSource>().PlayOneShot(rocketLaunch, 1f);
+
 
             
         }

@@ -9,13 +9,16 @@ public class RocketFactory : MonoBehaviour
     public GameObject player1RocketSpawner;
     public GameObject player2RocketSpawner;
 
+    public GameObject ship1RocketForward;
+    public GameObject ship2RocketForward;
+
     private float rocketForce = 200f;
-    private float chargingSpeed = 400f;
+    private float chargingSpeed = 1000f;
     private float minForce = 200f;
-    private float maxForce = 2000f;
+    private float maxForce = 5000f;
     
 
-    private void _RelocateBullet(Transform newTransform){
+    private void _RelocateRocket(Transform newTransform){
         
         rocket.transform.parent = newTransform;
         rocket.GetComponent<Rigidbody>().useGravity = false;
@@ -28,32 +31,35 @@ public class RocketFactory : MonoBehaviour
         rocket.transform.rotation = newTransform.rotation;
     }
 
-    public void RelocateBullet(int currentPlayer){
+    public void RelocateRocket(int currentPlayer){
 
         
         if(currentPlayer == 0){
 
-           _RelocateBullet(player1RocketSpawner.transform);
+           _RelocateRocket(player1RocketSpawner.transform);
            
         }else{
 
            
-              _RelocateBullet(player2RocketSpawner.transform);
+            _RelocateRocket(player2RocketSpawner.transform);
             
         }
+
+        rocket.GetComponent<RocketScript>().currentPlayer = currentPlayer;
 
     }
 
     public void Fire(int currentPlayer){
 
         rocket.GetComponent<Rigidbody>().useGravity = true;
+        rocket.SetActive(true);
         if(currentPlayer == 0){
 
-            rocket.GetComponent<Rigidbody>().AddForce(Quaternion.Euler(90f, 0, 0) * rocket.transform.forward * rocketForce);
+            rocket.GetComponent<Rigidbody>().AddForce(ship1RocketForward.transform.forward * rocketForce);
 
         }else{
 
-            rocket.GetComponent<Rigidbody>().AddForce(Quaternion.Euler(-90f, 0, 0) * rocket.transform.forward * rocketForce);
+            rocket.GetComponent<Rigidbody>().AddForce(ship2RocketForward.transform.forward * rocketForce);
             
 
         }
@@ -72,6 +78,14 @@ public class RocketFactory : MonoBehaviour
 
         return rocketForce / maxForce;
        
+    }
+
+    public void MeteorRocket(int currentPlayer, int powerUp){
+
+        rocket.GetComponent<RocketScript>().powerUpPlayer = currentPlayer;
+        rocket.GetComponent<RocketScript>().powerUp = powerUp;
+       
+
     }
     
 }
